@@ -1,0 +1,31 @@
+<% if (locals.user) { %>
+	<div id="chat-toggle">
+		 <img style="height: 15rem;" src="https://cdn3d.iconscout.com/3d/free/thumb/free-chat-3d-illustration-download-in-png-blend-fbx-gltf-file-formats--message-communication-chatting-conversation-messaging-user-interface-pack-illustrations-4715767.png" alt="Emoji" id="chat-toggle-emoji">
+	</div>
+	<div id="user-chat-box">
+		 <ul id="chat-messages-list">
+			  <li class="other-message">
+					<span>Other Message</span>
+			  </li>
+			  <li class="self-message">
+					<span>Self Message</span>
+			  </li>
+		 </ul>
+		 <div id="chat-message-input-container">
+			  <input id="chat-message-input" placeholder="Type message here">
+			  <button id="send-message">Send</button>
+		 </div>
+	</div>
+
+	<script>
+		 document.addEventListener("DOMContentLoaded", function() {
+			  const chatToggle = document.getElementById("chat-toggle");
+			  const userChatBox = document.getElementById("user-chat-box");
+
+			  chatToggle.addEventListener("click", function() {
+					userChatBox.classList.toggle("show");
+			  });
+		 });
+	</script>
+<% } %>
+

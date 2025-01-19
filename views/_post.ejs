@@ -1,0 +1,43 @@
+
+
+<li id="post-<%= post._id %>" style=" background-color:#ffffff ;margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+    <p>
+        <% if (locals.user && locals.user.id == post.user.id) { %>
+        <small>
+            <a class="delete-post-button" href="/posts/destroy/<%= post.id %>" style="color: red; text-decoration: none;">X</a>
+        </small>
+        <% } %>
+        <%= post.content %>
+        <br>
+        <small>
+            <%= post.user.name %>
+        </small>
+
+        <br>
+        <small>
+            <% if (locals.user) { %>
+                <a class="toggle-like-button" data-likes="<%= post.likes.length %>" href="/likes/toggle/?id=<%=post._id%>&type=Post" style="color: #1B74E4; text-decoration: none;">
+                    <%= post.likes.length %> Likes
+                </a>
+            <% } else { %>
+                <%= post.likes.length %> Likes
+            <% } %>
+        </small>
+    </p>
+    <div class="post-comments" style="margin-top: 10px;">
+        <% if (locals.user) { %>
+            <form  id="post-<%= post._id %>-comments-form" action="/comments/create" method="POST" style="margin-bottom: 10px;">
+                <input type="text" name="content" placeholder="Type Here to add comment..." required style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                <input type="hidden" name="post" value="<%= post._id %>">
+                <input type="submit" value="Add Comment" style="padding: 5px 10px; background-color: #1B74E4; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            </form>
+        <% } %>
+        <div class="post-comments-list">
+            <ul id="post-comments-<%= post._id %>">
+                <% for (comment of post.comments) { %>
+                    <%- include('_comment') -%>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</li>
